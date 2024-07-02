@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>Calendar Style Planer</title>
+    <link rel="stylesheet" href="planner.css">
+<body>
+  <div class="conatiner">
+    <div class="navigation">
+        <h1>Planner for  <span id="currentMonth"></span>
+    </div>
+    <div class="move">
+      <button id="prevMonth">Previous Month</button>
+      <div class="goTo">
+          <input type="number" id="goToMonthInput" min="1" max="12" placeholder="Enter month number">
+          <button id="goToMonthButton">Go to Month</button>
+      </div>
+      <button id="nextMonth">Next Month</button>
+  </div>
+        
+      <div class="calendar-header">
+        <div class="day-header monday">Monday</div>
+        <div class="day-header tuesday">Tuesday</div>
+        <div class="day-header wednesday">Wednesday</div>
+        <div class="day-header thursday">Thursday</div>
+        <div class="day-header friday">Friday</div>
+        <div class="day-header saturday">Saturday</div>
+        <div class="day-header sunday">Sunday</div>
+      </div>
+      <div class="calendar" id="calendar"></div>
+    </div>
+    <div class="calendar-header"></div>
+    <div id="calendar" class="calendar"></div>
+    <button id="addAllTasks">Add All Tasks</button>
+    <button id="clearAllTasks">Clear All Tasks</button>
+    <div class="navigate">
+      <a href="mainpage.html">Main Page</a>
+  </div>
+    <script src="planner.js"></script>
+</body>
+</html>
+
+
