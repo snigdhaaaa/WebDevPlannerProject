@@ -1,11 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
     //get element from html
-    const calendar = document.getElementById('calendar');
-    const currentMonthSpan = document.getElementById('currentMonth');
-    const prevMonthButton = document.getElementById('prevMonth');
-    const nextMonthButton = document.getElementById('nextMonth');
-    const goToMonthInput = document.getElementById('goToMonthInput');
-    const goToMonthButton = document.getElementById('goToMonthButton');
+    function getElement(id) { //get element
+        return document.getElementById(id);
+      }
+    function createElement(id) {    //create element
+        return document.createElement(id);
+      }
+      
+      const calendar = getElement('calendar');
+      const currentMonthSpan = getElement('currentMonth');
+      const prevMonthButton = getElement('prevMonth');
+      const nextMonthButton = getElement('nextMonth');
+      const goToMonthInput = getElement('goToMonthInput');
+      const goToMonthButton = getElement('goToMonthButton');
   //array for the calendar detail
     const months = [
         { name: 'January', days: 31, startDay: 0 },//starting index is 0 for array
@@ -25,15 +32,14 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentMonthIndex = 6; //Current month July
   // displaying the day number, an input field for tasks, and a list for displaying tasks.
     function createDayBox(number, weekDay) {
-        const dayBox = document.createElement('div');
-        dayBox.classList.add('day');
-        dayBox.classList.add(weekDay.toLowerCase());
+        const dayBox = createElement('div');
+        dayBox.classList.add('day', weekDay.toLowerCase());
     
-        const dayNumberDiv = document.createElement('div');
+        const dayNumberDiv = createElement('div');
         dayNumberDiv.textContent = number;
         dayNumberDiv.style.fontWeight = 'bold';
     
-        const inputTasks = document.createElement('input');
+        const inputTasks = createElement('input');
         inputTasks.type = 'text';
         inputTasks.className = 'task-input';
         inputTasks.placeholder = 'Add Event';
@@ -45,24 +51,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     
-        const listTask = document.createElement('ul');
+        const listTask = createElement('ul');
         listTask.className = 'task-list';
         
-        dayBox.appendChild(dayNumberDiv);
-        dayBox.appendChild(inputTasks);
-        dayBox.appendChild(listTask);
+        dayBox.append(dayNumberDiv, inputTasks, listTask);
     
         return dayBox;
     }
     
     function addTask(dayBox, taskContent) {
         //adding task to the list
-        const taskItem = document.createElement('li');
+        const taskItem = createElement('li');
         taskItem.className = 'task';
         taskItem.textContent = taskContent;
 
         //delete button
-        const deleteButton = document.createElement('button');
+        const deleteButton = createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.className = 'delete-button';
         
@@ -79,9 +83,8 @@ document.addEventListener('DOMContentLoaded', function() {
     //create week header
     for (let i = 0; i < daysOfWeek.length; i++) {
         const day = daysOfWeek[i];
-        const dayHeader = document.createElement('div');
-        dayHeader.classList.add('day-header');
-        dayHeader.classList.add(day.toLowerCase());
+        const dayHeader = createElement('div');
+        dayHeader.classList.add('day-header',day.toLowerCase());
         dayHeader.textContent = day;
     }
     function createCalendar(monthIndex) {
@@ -90,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentMonthSpan.textContent = month.name;//update month
         //add empty box before the starting date
         for (let i = 0; i < month.startDay; i++) {
-            calendar.appendChild(document.createElement('div'));
+            calendar.appendChild(createElement('div'));
         }
         //create month box
         for (let i = 1; i <= month.days; i++) {
@@ -99,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
             calendar.appendChild(dayBox);
         }
     }
+    createCalendar(currentMonthIndex);
     //go to the previous month
     prevMonthButton.addEventListener('click', function() {
         currentMonthIndex = (currentMonthIndex - 1 + months.length) % months.length;
@@ -121,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
   //clear all task
-    const clearAllTasksButton = document.getElementById('clearAllTasks');
+    const clearAllTasksButton = getElement('clearAllTasks');
     clearAllTasksButton.addEventListener('click', function() {
       const confirmClear = confirm("Are you sure you want to clear all tasks?");
       if (confirmClear) {
@@ -132,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   //add all task
-  const addAllTasksButton = document.getElementById('addAllTasks');
+  const addAllTasksButton=getElement('addAllTasks');
   addAllTasksButton.addEventListener('click', function() {
       const taskInputs = document.querySelectorAll('.task-input');
       for (let i = 0; i < taskInputs.length; i++) {
@@ -144,5 +148,4 @@ document.addEventListener('DOMContentLoaded', function() {
           }
       }
   });
-  createCalendar(currentMonthIndex);
 });
