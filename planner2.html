@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Calendar</title>
+    <link rel="stylesheet" href="planner2.css">
+</head>
+<body>
+    <div class="calendar">
+        <div class="month">
+            <button id="prevMonth">&lt;</button>
+            <h1 id="monthYear">July 2024</h1>
+            <button id="nextMonth">&gt;</button>
+        </div>
+        <div class="weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>
+        <div class="days">
+            <!-- Calendar days will be populated here -->
+        </div>
+    </div>
+
+    <!-- Modal for task planner -->
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Task Planner</h2>
+            <div id="taskList"></div>
+            <textarea id="taskInput" rows="1" cols="50" placeholder="Add a task"></textarea>
+            <button id="addTaskBtn">Add Task</button>
+            <button id="markAllCompleteBtn">Mark All Complete</button>
+            <button id="deleteAllBtn">Delete All</button>
+        </div>
+    </div>
+
+    <script src="planner2.js"></script>
+</body>
+</html>
