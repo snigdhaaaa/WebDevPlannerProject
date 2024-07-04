@@ -45,14 +45,19 @@ body {
   font-weight: bold;
   font-size: 14px;
 }
-
-.day-header.monday { background-color: rgb(216, 239, 211); }
-.day-header.tuesday { background-color: rgb(149, 210, 179); }
-.day-header.wednesday { background-color:rgb(85, 173, 155); }
-.day-header.thursday { background-color: rgb(241, 248, 232); }
-.day-header.friday { background-color:rgb(216, 239, 211); }
-.day-header.saturday { background-color:rgb(149, 210, 179); }
-.day-header.sunday { background-color: rgb(85, 173, 155); }
+/* weekDay Header Color */
+.day-header.monday,.day-header.friday { 
+  background-color: rgb(216, 239, 211); 
+}
+.day-header.tuesday,.day-header.saturday { 
+  background-color: rgb(149, 210, 179); 
+}
+.day-header.wednesday,.day-header.sunday { 
+  background-color:rgb(85, 173, 155); 
+}
+.day-header.thursday { 
+  background-color: rgb(241, 248, 232); 
+}
 
 .calendar {
   display: grid;
@@ -102,13 +107,13 @@ h1{
   margin-bottom: 5%;
   border-radius: 5px;
 }
-.navigation {
+.top {
   background-color:rgb(85, 173, 155);
   overflow: hidden;
   text-align: center;
   width: 100%; 
 }
-.navigation a {
+.top a {
   font-size: 25px;
 }
 #addAllTasks {

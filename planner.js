@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function createElement(id) {    //create element
         return document.createElement(id);
       }
-      
+
       const calendar = getElement('calendar');
       const currentMonthSpan = getElement('currentMonth');
       const prevMonthButton = getElement('prevMonth');
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // displaying the day number, an input field for tasks, and a list for displaying tasks.
     function createDayBox(number, weekDay) {
         const dayBox = createElement('div');
-        dayBox.classList.add('day', weekDay.toLowerCase());
+        dayBox.classList.add('day', weekDay.toLowerCase()); //convert weekday to lowercase
     
         const dayNumberDiv = createElement('div');
         dayNumberDiv.textContent = number;
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
         deleteButton.textContent = 'Delete';
         deleteButton.className = 'delete-button';
         
-        deleteButton.addEventListener('click', function() {
+        deleteButton.addEventListener('click', function() { //delete when click button
             taskItem.remove();
         });
     
@@ -117,34 +117,34 @@ document.addEventListener('DOMContentLoaded', function() {
     goToMonthButton.addEventListener('click', function() {
         const monthNumber = parseInt(goToMonthInput.value);
         if (!isNaN(monthNumber) && monthNumber >= 1 && monthNumber <= 12) {
-            currentMonthIndex = monthNumber - 1;
+            currentMonthIndex = monthNumber - 1; //subtract 1 because index start at 0
             createCalendar(currentMonthIndex);
-            goToMonthInput.value = '';
+            goToMonthInput.value = ''; //clear input field
         } else {
             alert('Please enter a valid month number (1-12).'); //alert when incorrect inputs
         }
     });
-  //clear all task
+  //clear all task that was entered
     const clearAllTasksButton = getElement('clearAllTasks');
     clearAllTasksButton.addEventListener('click', function() {
-      const confirmClear = confirm("Are you sure you want to clear all tasks?");
+      const confirmClear = confirm("Do you want to clear all tasks?");
       if (confirmClear) {
         const allTasks = document.querySelectorAll('.task');
         for (let i = allTasks.length - 1; i >= 0; i--) {
-          allTasks[i].remove();
+          allTasks[i].remove();//removed tasks
         }
       }
     });
-  //add all task
+  //add all task that was enetered
   const addAllTasksButton=getElement('addAllTasks');
   addAllTasksButton.addEventListener('click', function() {
       const taskInputs = document.querySelectorAll('.task-input');
       for (let i = 0; i < taskInputs.length; i++) {
           const input = taskInputs[i];
-          if (input.value.trim() !== '') {
+          if (input.value.trim() !== '') { //check the input is not empty after removing white space
               const dayBox = input.closest('.day');
-              addTask(dayBox, input.value.trim());
-              input.value = '';
+              addTask(dayBox, input.value.trim()); //call addTask function
+              input.value = ''; //clear the input field
           }
       }
   });
