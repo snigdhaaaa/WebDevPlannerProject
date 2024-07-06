@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/planner3.css">
+    <title>Weekly Calendar 3</title>
+</head>
+<body>
+
+    <br>
+
+    <div class="days" style="overflow-x: auto;">
+        <table id="days">
+            <tr id="firstRow">
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
+            </tr>
+            <tr>
+                <th> <ul id="monday"></ul> <input type="text"  id="mondayInput">  <button onclick="addTask(document.getElementById('mondayInput'), document.getElementById('monday'))">Add Task</button> </th>                
+                <th> <ul id="tuesday"></ul> <input type="text" id="tuesdayInput">  <button onclick="addTask(document.getElementById('tuesdayInput'), document.getElementById('tuesday'))">Add Task</button> </th>                
+                <th> <ul id="wednesday"></ul> <input type="text" id="wednesdayInput">  <button onclick="addTask(document.getElementById('wednesdayInput'), document.getElementById('wednesday'))">Add Task</button> </th>                
+                <th> <ul id="thursday"></ul> <input type="text" id="thursdayInput">  <button onclick="addTask(document.getElementById('thursdayInput'), document.getElementById('thursday'))">Add Task</button> </th>                
+                <th> <ul id="friday"></ul> <input type="text" id="fridayInput">  <button onclick="addTask(document.getElementById('fridayInput'), document.getElementById('friday'))">Add Task</button> </th>                
+                <th> <ul id="saturday"></ul> <input type="text" id="saturdayInput">  <button onclick="addTask(document.getElementById('saturdayInput'), document.getElementById('saturday'))">Add Task</button> </th>                
+                <th> <ul id="sunday"></ul> <input type="text" id="sundayInput"> <button onclick="addTask(document.getElementById('sundayInput'), document.getElementById('sunday'))">Add Task</button> </th>                
+            </tr>
+        </table>
+    </div>
+
+    <br>
+
+    <div class="Monthly">
+        <h1>Monthly Goals</h1>
+        <ul id="Monthly"></ul>
+        <input type="text" id="monthlyGoals"> <button onclick="addTask(document.getElementById('monthlyGoals'), document.getElementById('Monthly') )">Add Task</button>
+    </div>
+
+    <div class="buttons">
+        <a href="main_page.html"><button>Main Page</button></a>
+        <button onclick="reset()">Reset</button>
+    </div>
+
+    <div class="Yearly">
+        <h1>Yearly Goals</h1>
+        <ul id="Yearly"></ul>
+        <input type="text" id="yearlyGoals"> <button onclick="addTask(document.getElementById('yearlyGoals'), document.getElementById('Yearly') )">Add Task</button>
+    </div>
+    
+<script src="assets/js/scripts.js"></script>
+</body>
+</html>

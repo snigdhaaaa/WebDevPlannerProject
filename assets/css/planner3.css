@@ -1,0 +1,68 @@
+body{
+    background-color: #DEF9C4;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.days {
+    text-align: center;
+    background-color: #9CDBA6;
+}
+
+#firstRow {
+    background-color: #50B498;
+}
+
+.days table, th, td {
+    border: 1px solid;
+    padding: 20px;
+}
+
+.days table, th, td, input {
+    border: 1px solid;
+    padding: 20px;
+}
+
+.days table, th, td, button {
+    border: 1px solid;
+    padding: 20px;
+}
+
+button:hover {
+    background-color: #468585;
+}
+
+li {
+    text-align: left;
+    font-size: 20px;
+    font-weight: normal;
+}
+  
+.days table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.Monthly{
+    background-color: #9CDBA6;
+    width: 17%;
+    text-align: center;
+    display: inline-block;
+}
+
+.Yearly{
+    background-color: #9CDBA6;
+    text-align: center;
+    width: 17%;
+    height: auto;
+}
+
+.buttons {
+    display: inline-block;
+    position: absolute;
+    text-align: center;
+    left: 45%;
+}
+
+select {
+    padding: 20px;
+}
