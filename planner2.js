@@ -7,13 +7,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const deleteAllBtn = document.getElementById('deleteAllBtn');
     const taskInput = document.getElementById('taskInput');
     const taskList = document.getElementById('taskList');
-    const monthYearElement = document.getElementById('monthYear');
+    const monthYearElement = document.querySelector('.month h1');
     const prevMonthBtn = document.getElementById('prevMonth');
     const nextMonthBtn = document.getElementById('nextMonth');
+    const returnMainBtn = document.getElementById('returnMain');
     let selectedDayElement;
     let tasks = {};
-    let currentMonth = 6; // July
-    let currentYear = 2024;
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
 
     // Close the modal
     closeModal.onclick = function() {
@@ -44,6 +45,34 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Populate calendar with days
+    function updateCalendar() {
+        daysElement.innerHTML = '';
+        monthYearElement.innerText = `${getMonthName(currentMonth)} ${currentYear}`;
+
+        const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+        // Fill in the blank days at the start of the month
+        for (let i = 0; i < firstDay; i++) {
+            const emptyDay = document.createElement('div');
+            daysElement.appendChild(emptyDay);
+        }
+
+        // Fill in the days of the month
+        for (let i = 1; i <= daysInMonth; i++) {
+            const day = document.createElement('div');
+            day.innerText = i;
+            day.dataset.day = `${currentYear}-${currentMonth + 1}-${i}`;
+            day.onclick = function() {
+                selectedDayElement = day;
+                showTasks(day.dataset.day);
+                taskModal.style.display = 'block';
+            };
+            daysElement.appendChild(day);
+        }
+    }
+
     // Function to show tasks for a selected day
     function showTasks(day) {
         taskList.innerHTML = '';
@@ -62,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (complete) task.classList.add('complete');
 
         const taskContent = document.createElement('span');
-        taskContent.innerText = `${taskText}`;
+        taskContent.innerText = taskText;
         task.appendChild(taskContent);
 
         const taskButtons = document.createElement('div');
@@ -98,31 +127,28 @@ document.addEventListener('DOMContentLoaded', function () {
         showTasks(day);
     }
 
-    // Function to mark all tasks as complete
-    function markAllComplete() {
+    // Function to mark all tasks complete for a day
+    markAllCompleteBtn.onclick = function() {
         if (tasks[selectedDayElement.dataset.day]) {
             tasks[selectedDayElement.dataset.day].forEach(task => task.complete = true);
             showTasks(selectedDayElement.dataset.day);
         }
-    }
+    };
 
-    // Function to delete all tasks
-    function deleteAllTasks() {
+    // Function to delete all tasks for a day
+    deleteAllBtn.onclick = function() {
         if (tasks[selectedDayElement.dataset.day]) {
             tasks[selectedDayElement.dataset.day] = [];
             showTasks(selectedDayElement.dataset.day);
         }
-    }
-
-    markAllCompleteBtn.onclick = markAllComplete;
-    deleteAllBtn.onclick = deleteAllTasks;
+    };
 
     // Function to update the calendar
     function updateCalendar() {
         daysElement.innerHTML = '';
         monthYearElement.innerText = `${getMonthName(currentMonth)} ${currentYear}`;
 
-        const firstDay = new Date(currentYear, currentMonth).getDay();
+        const firstDay = new Date(currentYear, currentMonth, 1).getDay();
         const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
         // Fill in the blank days at the start of the month
@@ -171,6 +197,10 @@ document.addEventListener('DOMContentLoaded', function () {
             currentMonth++;
         }
         updateCalendar();
+    };
+
+    returnMainBtn.onclick = function() {
+        window.location.href = 'main_page.html'; // Change this to the actual main page URL
     };
 
     updateCalendar();
