@@ -58,4 +58,8 @@ li a:hover {
   
 
 }
-
+.rating {
+    margin: 20px; 
+    text-align: center;
+    color:rgb(85, 173, 155);
+}
