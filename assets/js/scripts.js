@@ -9,11 +9,11 @@ function onClickGetWebsite() {
         const image = document.getElementById('image').src = 'assets/imgs/Website3.jpg';
         document.getElementById('link').href = 'planner3.html'
     } else if(document.getElementById('website4').checked){
-        const image = document.getElementById('image').src = 'assets/imgs/Website12.jpg';
-        document.getElementById('link').href = 'planner.html'
+        const image = document.getElementById('image').src = 'assets/imgs/Website4.jpg';
+        document.getElementById('link').href = 'planner4.html'
     } else if(document.getElementById('website5').checked){
-        const image = document.getElementById('image').src = 'assets/imgs/Website12.jpg';
-        document.getElementById('link').href = 'planner.html'
+        const image = document.getElementById('image').src = 'assets/imgs/Website5.jpg';
+        document.getElementById('link').href = 'planner5.html'
     }
 }
 
