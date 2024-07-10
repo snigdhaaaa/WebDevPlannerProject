@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     returnMainBtn.onclick = function() {
-        window.location.href = 'main_page.html'; // Change this to the actual main page URL
+        window.location.href = 'index.html'; // Change this to the actual main page URL
     };
 
     updateCalendar();
