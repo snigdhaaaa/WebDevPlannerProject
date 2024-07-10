@@ -189,3 +189,72 @@ button:hover {
 #prevMonth:hover, #nextMonth:hover {
     background-color: #618264;
 }
+
+//media query for different screen sizes
+@media (max-width: 768px) {
+    .calendar {
+        width: 80%;
+    }
+    
+    .weekdays div, .days div {
+        font-size: 1.5em; /* Adjusted font size for smaller screens */
+    }
+    
+    .modal-content {
+        width: 100%;
+        margin: 10% auto;
+    }
+    
+    #taskInput {
+        font-size: 1.5em; /* Adjusted font size for smaller screens */
+    }
+    
+    #addTaskBtn {
+        font-size: 0.8em; /* Adjusted font size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar {
+        width: 95%;
+    }
+
+    .weekdays div, .days div {
+        font-size: 1.5em; /* Adjusted font size for smaller screens */
+    }
+
+    .modal-content {
+        width: 100%;
+        margin: 10% auto;
+    }
+
+    #taskInput {
+        font-size: 1.5em; /* Adjusted font size for smaller screens */
+    }
+
+    #addTaskBtn {
+        font-size: 0.8em; /* Adjusted font size for smaller screens */
+    }
+}
+
+@media (min-width: 1200px) {
+    .calendar {
+        width: 80%;
+    }
+
+    .weekdays div, .days div {
+        font-size: 2.5em; /* Larger font size for larger screens */
+    }
+
+    .modal-content {
+        max-width: 1000px; /* Increased max-width for larger screens */
+    }
+
+    #taskInput {
+        font-size: 2.5em; /* Larger font size for larger screens */
+    }
+
+    #addTaskBtn {
+        font-size: 1.2em; /* Larger font size for larger screens */
+    }
+}
