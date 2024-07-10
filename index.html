@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planner App</title>
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    
+    <div id="container">
+      <div id="header">
+        <div id="monthDisplay"></div>
+        <div>
+            <select name="BackgroudColor" id="BackgroudColor">
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+                <option value="white">White</option>
+              </select>
+            <button id="updateColor" onclick="BackgroudColorFunction()">Update Color</button>
+          <button id="backButton">Back</button>
+          <button id="nextButton">Next</button>
+          <button id="homepage1">Main Page</button>
+        </div>
+      </div>
+      <script>
+        function BackgroudColorFunction() {
+            document.getElementsByTagName("BODY")[0].style.backgroundColor =document.querySelector('#BackgroudColor').value;
+        }
+        </script>
+      <div id="weekdays">
+        <div>Sunday</div>
+        <div>Monday</div>
+        <div>Tuesday</div>
+        <div>Wednesday</div>
+        <div>Thursday</div>
+        <div>Friday</div>
+        <div>Saturday</div>
+      </div>
+
+      <div id="calendar"></div>
+    </div>
+
+    <div id="newEventModal">
+      <h2>New Event</h2>
+
+      <input id="eventTitleInput" placeholder="Event Title" />
+
+      <button id="saveButton">Save</button>
+      <button id="cancelButton">Cancel</button>
+      <p>Current Time: <span id="currentTime"></span></p>
+      <input type = "time" id = "alarmTime">
+      <span> 
+      <button onclick="setAlarm()">Set Alarm</button>
+      <button onclick="alarmSound.pause();">Stop Alarm</button>
+      <script>
+        function currentTime(){
+            var date = new Date();
+            var now = date.toLocaleString('en-US', {hour12: false});
+            document.getElementById('currentTime').innerHTML=now;
+        }
+        setInterval(currentTime,1);
+
+        var alarmSound = new Audio("alarmsounds.wav")
+        function setAlarm(){
+            alert("Hi")
+            var alarmTime = document.getElementById('alarmTime').value;
+            var now = new Date();
+            var alarm = new Date(now.toDateString() + " " + alarmTime);
+            var timeRemaining = alarm - now;
+            setTimeout( playAlarm, timeRemaining);
+            document.getElementById('alarmTime').disabled = true;
+        }
+        function playAlarm(){
+            alarmSound.play();
+            document.getElementById('alarmTime').disabled = false;
+
+        }
+      </script>
+    </span>
+    </div>
+
+    <div id="deleteEventModal">
+      <h2>Event</h2>
+      <input id="eventTitleInput1"  placeholder="Event Title" />
+      <p id="eventText"></p>
+      <button id="AdditionalEvent" onclick="addEvent()">Add</button>
+      <script>
+        function addEvent(){
+
+        }
+      </script>
+      <input>
+      <button id="deleteButton">Delete</button>
+      <button id="closeButton">Close</button>
+    </div>
+
+    <div id="modalBackDrop"></div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
