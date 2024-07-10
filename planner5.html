@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>July 2024 Calendar</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+  }
+  #homepage-button {
+    background-color: #597445;
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  #homepage-button:hover {
+    background-color: #485a37;
+  }
+  #title {
+    font-size: 24px;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  #container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+    max-width: 950px;
+  }
+  #calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    margin-right: 30px;
+  }
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 100px);
+    grid-template-rows: auto repeat(5, 100px);
+    gap: 10px;
+  }
+  .calendar-day, .day-header {
+    border: 1px solid #597445;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  .day-header {
+    background-color: #597445;
+    color: white;
+  }
+  .calendar-day:hover {
+    background-color: #e9e9e9;
+  }
+  .event-list-header {
+    font-size: 18px;
+    background-color: #597445;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #597445;
+  }
+  .event-list {
+    list-style: none;
+    padding: 0;
+    width: 400px;
+    height: 600px;
+    overflow-y: auto;
+    border: 1px solid #597445;
+    background-color: #f1f1f1;
+    font-size: 16px;
+    text-align: center; /* Center the "nothing to look forward to" text */
+  }
+  .event-item {
+    border: 1px solid #ddd;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  .no-events {
+    color: #999;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  button {
+    background-color: #597445;
+    color: white;
+    border: none;
+    margin: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  button:hover {
+    background-color: #485a37;
+  }
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 300px;
+  }
+  .modal-content input,
+  .modal-content select {
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  .event-personal { color: blue; }
+  .event-work { color: green; }
+  .event-bday { color: red; }
+</style>
+</head>
+<body>
+<a id="homepage-button" href="main_page.html">Homepage</a>
+<div id="container">
+  <div id="calendar-container">
+    <h1 id="title">Planner for July</h1>
+    <div class="calendar-grid">
+      <div class="day-header">Sun</div>
+      <div class="day-header">Mon</div>
+      <div class="day-header">Tue</div>
+      <div class="day-header">Wed</div>
+      <div class="day-header">Thu</div>
+      <div class="day-header">Fri</div>
+      <div class="day-header">Sat</div>
+    </div>
+  </div>
+  <div>
+    <div class="event-list-header">List of Events</div>
+    <ul class="event-list">
+      <!-- Event list will be populated by JavaScript -->
+      <li class="no-events">Nothing to look forward to 😞</li>
+    </ul>
+    <button onclick="clearEvents()">Clear all events</button>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>New Event for <span id="dateLabel"></span></p>
+    <input type="text" id="eventTitle" placeholder="Title">
+    <select id="eventType">
+      <option value="personal">Personal</option>
+      <option value="work">Work</option>
+      <option value="bday">Birthday</option>
+    </select>
+    <button onclick="addEvent()">Add</button>
+    <button onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+<script>
+const month = 7; // July
+const year = 2024;
+const daysInMonth = new Date(year, month, 0).getDate();
+const firstDay = new Date(year, month - 1, 1).getDay();
+let selectedDate;
+let eventCount = 0;
+
+const eventTypes = {
+  personal: 'Personal 📌',
+  work: 'Work 💼',
+  bday: 'Birthday 🎂'
+};
+
+function populateCalendar() {
+  const grid = document.querySelector('.calendar-grid');
+  for (let i = 7; i < grid.children.length; i++) {
+    grid.removeChild(grid.children[i]);
+    i--;
+  }
+
+  for (let i = 0; i < firstDay; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'calendar-day';
+    grid.appendChild(cell);
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const cell = document.createElement('div');
+    cell.className = 'calendar-day';
+    cell.textContent = day;
+    cell.onclick = () => showEventModal(day);
+    grid.appendChild(cell);
+  }
+}
+
+function showEventModal(day) {
+  selectedDate = day;
+  document.getElementById('dateLabel').textContent = `July ${day}, 2024`;
+  document.getElementById('eventTitle').value = ''; // Clear previous text
+  document.getElementById('eventType').value = 'personal'; // Default value
+  document.getElementById('myModal').style.display = 'block';
+}
+
+function addEvent() {
+  const eventList = document.querySelector('.event-list');
+  const noEventsMessage = document.querySelector('.no-events');
+  if (noEventsMessage) {
+    eventList.removeChild(noEventsMessage);
+  }
+  const title = document.getElementById('eventTitle').value;
+  const type = document.getElementById('eventType').value;
+  if (title.trim()) {
+    eventCount++;
+    const existingEvent = document.getElementById(`event-${selectedDate}`);
+    if (existingEvent) {
+      existingEvent.innerHTML += `<br>${eventCount}. ${title} (${eventTypes[type]})`;
+    } else {
+      const event = document.createElement('li');
+      event.id = `event-${selectedDate}`;
+      event.innerHTML = `<strong>July ${selectedDate}, 2024:</strong><br>${eventCount}. ${title} (${eventTypes[type]})`;
+      event.className = `event-item`;
+      eventList.appendChild(event);
+    }
+    closeModal();
+  }
+}
+
+function clearEvents() {
+  const eventList = document.querySelector('.event-list');
+  eventList.innerHTML = '<li class="no-events">Nothing to look forward to 😞</li>';
+  eventCount = 0;
+}
+
+function closeModal() {
+  document.getElementById('myModal').style.display = 'none';
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function() {
+  closeModal();
+}
+
+// Close the modal if outside click
+window.onclick = function(event) {
+  var modal = document.getElementById('myModal');
+  if (event.target == modal) {
+    closeModal();
+  }
+}
+
+populateCalendar();
+</script>
+</body>
+</html>
+
+
