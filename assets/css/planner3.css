@@ -44,7 +44,7 @@ li {
 
 .Monthly{
     background-color: #9CDBA6;
-    width: 17%;
+    width: 25%;
     text-align: center;
     display: inline-block;
 }
@@ -52,17 +52,85 @@ li {
 .Yearly{
     background-color: #9CDBA6;
     text-align: center;
-    width: 17%;
+    width: 25%;
     height: auto;
 }
 
 .buttons {
     display: inline-block;
-    position: absolute;
     text-align: center;
+    position: relative;
     left: 45%;
 }
 
 select {
     padding: 20px;
+}
+
+
+@media (max-width:1280px) {
+    
+    .Monthly{
+        width: 25%;
+        display: table;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    
+    .Yearly{
+        width: 25%;
+        display: table;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .buttons {
+        left: 43%
+    }
+    
+}
+
+@media (max-width:900px) {
+    
+    .Monthly{
+        width: 35%;
+    }
+    
+    .Yearly{
+        width: 35%
+    }
+    
+}
+
+@media (max-width:650px) {
+    
+    .Monthly{
+        display: table;
+        margin-right: auto;
+        margin-left: auto;
+        width: 50%;
+    }
+    
+    .Yearly{
+        width: 50%;
+        display: table;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .buttons {
+        left: 25%;
+    }
+    
+}
+@media (max-width:470px) {
+    
+    .Monthly{
+        width: 70%;
+    }
+    
+    .Yearly{
+        width: 70%
+    }
+    
 }
